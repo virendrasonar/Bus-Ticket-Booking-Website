@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<title>Bus Ticket Booking Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<!-- Force CSS reload to avoid cache issues -->
+<link rel="stylesheet" th:href="@{/css/home_style.css?v=1}"/>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Bus Ticket Booking System</h1>
+    <p>Your journey begins here</p>
+  </div>
+</header>
+
+<main>
+  <div class="container-grid">
+    <a th:href="@{/tickets/add}" class="card">
+      <div class="icon"><i class="fas fa-ticket-alt"></i></div>
+      <h2>Book your Ticket</h2>
+      <p>Reserve your seat quickly and easily.</p>
+    </a>
+    
+    <a th:href="@{/tickets}" class="card">
+      <div class="icon"><i class="fas fa-list-ul"></i></div>
+      <h2>View Tickets</h2>
+      <p>See all your booked tickets in one place.</p>
+    </a>
+    
+    <a th:href="@{/tickets/search}" class="card">
+      <div class="icon"><i class="fas fa-search"></i></div>
+      <h2>Search Tickets</h2>
+      <p>Find tickets by passenger or date.</p>
+    </a>
+    
+    <a th:href="@{/tickets/cancel}" class="card">
+      <div class="icon"><i class="fas fa-times-circle"></i></div>
+      <h2>Cancel Ticket</h2>
+      <p>Manage your bookings and cancel if needed.</p>
+    </a>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Bus Ticket Booking App. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

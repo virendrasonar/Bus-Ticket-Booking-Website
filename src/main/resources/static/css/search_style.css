@@ -1,0 +1,94 @@
+@charset "UTF-8";
+/* General body styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fdf6f0; /* soft cream */
+    margin: 0;
+    padding: 20px;
+    color: #2c3e50;
+}
+
+/* Heading styling */
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+/* Form styling */
+form {
+    max-width: 500px;
+    margin: 0 auto; /* center the form */
+    padding: 25px 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Label + input styling */
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #34495e;
+}
+
+input[type="text"],
+input[type="date"] {
+    padding: 10px;
+    border: 1.5px solid #4b0082; /* deep purple border */
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 5px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+    border-color: #6a0dad; /* lighter purple on focus */
+    box-shadow: 0 0 6px rgba(106,13,173,0.4);
+    outline: none;
+}
+
+/* Button styling */
+button {
+    padding: 12px;
+    background-color: #4b0082; /* deep purple */
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #6a0dad; /* lighter purple on hover */
+    transform: translateY(-2px);
+}
+
+/* Back link styling */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #4b0082; /* deep purple */
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #6a0dad; /* lighter purple */
+}

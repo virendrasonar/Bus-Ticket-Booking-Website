@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Booked Tickets</title>
+<link rel="stylesheet" th:href="@{/css/list_style.css}"/>
+</head>
+<body>
+<h2>Booked Tickets</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Passenger</th>
+<th>Bus No.</th>
+<th>Source</th>
+<th>Destination</th>
+<th>Travel Date</th>
+<th>Price</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+
+<tr th:each="ticket : ${tickets}">
+
+<td th:text="${ticket.id}">1</td>
+<td th:text="${ticket.passengerName}">John</td>
+<td th:text="${ticket.busNumber}">BUS123</td> 
+<td th:text="${ticket.source}">City A</td> 
+<td th:text="${ticket.destination}">City B</td> 
+<td th:text="${ticket.travelDate}">2025-10-10</td> 
+<td th:text="${ticket.price}">350.0</td> 
+<td>
+  <a th:href="@{'/tickets/delete/' + ${ticket.id}}"
+     th:onclick="|return confirm('Are you sure to cancel ticket ' + ${ticket.id} + '?');|">
+    Cancel
+  </a>
+</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+<div class="footer-buttons">
+    <a th:href="@{/tickets/add}">Book Another Ticket</a>
+    <br>
+    <a th:href="@{/tickets/search}">Search Tickets</a>
+</div>
+
+</body>
+</html>

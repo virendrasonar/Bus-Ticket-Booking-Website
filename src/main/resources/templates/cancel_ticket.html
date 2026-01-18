@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cancel Ticket</title>
+<link rel="stylesheet" th:href="@{/css/cancel_ticket.css}"/>
+</head>
+<body>
+<h2>Cancel your Ticket</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Passenger</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="ticket : ${tickets}">
+            <td th:text="${ticket.id}"></td>
+            <td th:text="${ticket.passengerName}"></td>
+            <td th:text="${ticket.travelDate}"></td>
+            <td>
+                <form th:action="@{/tickets/cancel/{id}(id=${ticket.id})}" method="post">
+                    <button type="submit" onclick="return confirm('Are you sure you want to cancel this ticket?')">Cancel</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<div class="footer-buttons">
+
+<a th:href="@{/}">Back to Home</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Search Tickets</title>
+<link rel="stylesheet" th:href="@{/css/search_style.css}"/>
+</head>
+<body>
+
+<h2>Search Tickets</h2>
+<form th:action="@{/tickets/search}" method="post">
+<label>Passenger Name: <input type="text" name="passengerName" /></label>
+<label>Travel Date: <input type="date" name="travelDate" /></label>
+<button type="submit">Search</button>
+</form>
+<br>
+<a th:href="@{/tickets}">Back to All Tickets</a>
+</body>
+</html>

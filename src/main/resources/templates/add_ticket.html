@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Book Bus Tickets</title>
+<link rel="stylesheet" th:href="@{/css/add_style.css}"/>
+</head>
+<body>
+<h2>Book a Bus Ticket</h2>
+
+<form th:action="@{/tickets/add}" th:object="${ticket}" method="post">
+
+    <label>Ticket ID:</label>
+    <input type="number" th:field="*{id}" required/>
+    <br/><br/>
+
+    <label>Passenger Name:</label>
+    <input type="text" th:field="*{passengerName}" required/>
+    <br/><br/>
+
+    <label>Bus Number:</label>
+    <input type="text" th:field="*{busNumber}" required/>
+    <br/><br/>
+
+    <label>Source:</label>
+    <input type="text" th:field="*{source}" required/>
+    <br/><br/>
+
+    <label>Destination:</label>
+    <input type="text" th:field="*{destination}" required/>
+    <br/><br/>
+
+    <label>Date of Travel:</label>
+    <input type="date" th:field="*{travelDate}" required/>
+    <br/><br/>
+
+    <label>Price:</label>
+    <input type="number" step="0.01" th:field="*{price}" required/>
+    <br/><br/>
+
+    <label>WhatsApp Number:</label>
+    <input type="text" th:field="*{whatsappNumber}" 
+           pattern="\+91[0-9]{10}" placeholder="+91XXXXXXXXXX" required/>
+    <small>Format: +91 followed by 10-digit number</small>
+    <br/><br/>
+
+    <button type="submit">Book Ticket</button>
+
+</form>
+
+<br/>
+<a th:href="@{/tickets}">View All Tickets</a>
+
+</body>
+</html>
