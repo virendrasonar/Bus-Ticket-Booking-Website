@@ -2,54 +2,72 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<title>Bus Ticket Booking System</title>
 
-<title>Bus Ticket Booking Home</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
-<!-- Force CSS reload to avoid cache issues -->
-<link rel="stylesheet" th:href="@{/css/home_style.css?v=1}"/>
+<link rel="stylesheet" th:href="@{/css/home_style.css?v=6}"/>
 
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
-<header>
-  <div class="container">
-    <h1>Bus Ticket Booking System</h1>
-    <p>Your journey begins here</p>
+<!-- TOP NAVBAR -->
+<nav class="navbar">
+  <div class="logo"><i class="fas fa-bus"></i> BusBooking</div>
+  <div class="nav-links">
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/tickets}">View Tickets</a>
+    <a th:href="@{/tickets/search}">Search</a>
   </div>
-</header>
+</nav>
 
-<main>
-  <div class="container-grid">
-    <a th:href="@{/tickets/add}" class="card">
-      <div class="icon"><i class="fas fa-ticket-alt"></i></div>
-      <h2>Book your Ticket</h2>
-      <p>Reserve your seat quickly and easily.</p>
-    </a>
-    
-    <a th:href="@{/tickets}" class="card">
-      <div class="icon"><i class="fas fa-list-ul"></i></div>
-      <h2>View Tickets</h2>
-      <p>See all your booked tickets in one place.</p>
-    </a>
-    
-    <a th:href="@{/tickets/search}" class="card">
-      <div class="icon"><i class="fas fa-search"></i></div>
-      <h2>Search Tickets</h2>
-      <p>Find tickets by passenger or date.</p>
-    </a>
-    
-    <a th:href="@{/tickets/cancel}" class="card">
-      <div class="icon"><i class="fas fa-times-circle"></i></div>
-      <h2>Cancel Ticket</h2>
-      <p>Manage your bookings and cancel if needed.</p>
-    </a>
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1>India's Trusted Bus Ticket Booking</h1>
+      <p>Book bus tickets online easily and quickly</p>
+
+      <!-- SEARCH BAR -->
+      <div class="search-bar">
+        <input type="text" placeholder="From">
+        <input type="text" placeholder="To">
+        <input type="date">
+        <a th:href="@{/tickets/add}" class="search-btn">Search Buses</a>
+      </div>
+
+    </div>
   </div>
-</main>
+</section>
+
+<!-- QUICK ACTIONS -->
+<section class="quick-actions">
+
+  <a th:href="@{/tickets/add}" class="action-card">
+    <i class="fas fa-ticket-alt"></i>
+    <h3>Book Ticket</h3>
+  </a>
+
+  <a th:href="@{/tickets}" class="action-card">
+    <i class="fas fa-list"></i>
+    <h3>View Tickets</h3>
+  </a>
+
+  <a th:href="@{/tickets/search}" class="action-card">
+    <i class="fas fa-search"></i>
+    <h3>Search Ticket</h3>
+  </a>
+
+  <a th:href="@{/tickets/cancel}" class="action-card">
+    <i class="fas fa-times-circle"></i>
+    <h3>Cancel Ticket</h3>
+  </a>
+
+</section>
 
 <footer>
-  <p>&copy; 2025 Bus Ticket Booking App. All rights reserved.</p>
+  <p>© 2026 Bus Ticket Booking System | Developed by Virendra</p>
 </footer>
 
 </body>
