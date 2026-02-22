@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Available Buses</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/available_style.css}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>🚌 Available Buses</h2>
+
+    <!-- If no buses found -->
+    <div th:if="${#lists.isEmpty(buses)}" class="no-bus">
+        No buses found for selected route.
+    </div>
+
+    <!-- If buses available -->
+    <table th:if="${!#lists.isEmpty(buses)}">
+
+        <thead>
+            <tr>
+                <th>Bus Name</th>
+                <th>Number</th>
+                <th>Route</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="bus : ${buses}">
+                <td th:text="${bus.busName}"></td>
+                <td th:text="${bus.busNumber}"></td>
+                <td th:text="${bus.source + ' → ' + bus.destination}"></td>
+                <td th:text="'₹' + ${bus.price}"></td>
+                <td>
+                    <a th:href="@{/tickets/add(busId=${bus.id})}"
+                       class="book-btn">Book</a>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <div class="back-link">
+        <a th:href="@{/}">← Back to Home</a>
+    </div>
+
+</div>
+
+</body>
+</html>

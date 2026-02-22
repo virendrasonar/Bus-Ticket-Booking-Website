@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+}
+
+/* MAIN CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+/* TITLE */
+h2 {
+    text-align: center;
+    color: #d32f2f;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* TABLE STYLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+}
+
+/* TABLE HEADER */
+th {
+    background: #d32f2f;
+    color: #ffffff;
+    padding: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* TABLE BODY */
+td {
+    padding: 16px;
+    text-align: center;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 0.95rem;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover {
+    background: #fafafa;
+}
+
+/* BOOK BUTTON */
+.book-btn {
+    background: #d32f2f;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.book-btn:hover {
+    background: #b71c1c;
+    transform: translateY(-2px);
+}
+
+/* NO BUS MESSAGE */
+.no-bus {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* CENTERED BACK BUTTON */
+.back-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.back-link a {
+    background: #212121;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.back-link a:hover {
+    background: #000000;
+}
