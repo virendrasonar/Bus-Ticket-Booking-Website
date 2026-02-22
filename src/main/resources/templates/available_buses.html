@@ -14,37 +14,53 @@
 
     <h2>🚌 Available Buses</h2>
 
-    <!-- If no buses found -->
-    <div th:if="${#lists.isEmpty(buses)}" class="no-bus">
-        No buses found for selected route.
-    </div>
-
-    <!-- If buses available -->
-    <table th:if="${!#lists.isEmpty(buses)}">
-
+    <table>
         <thead>
             <tr>
                 <th>Bus Name</th>
-                <th>Number</th>
                 <th>Route</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Duration</th>
                 <th>Price</th>
                 <th>Action</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr th:each="bus : ${buses}">
+            <tr th:each="bus, stat : ${buses}">
+                
                 <td th:text="${bus.busName}"></td>
-                <td th:text="${bus.busNumber}"></td>
+
                 <td th:text="${bus.source + ' → ' + bus.destination}"></td>
+
+                
+                <td th:text="${stat.index == 0 ? '06:00 AM' :
+                              stat.index == 1 ? '08:30 AM' :
+                              stat.index == 2 ? '11:00 AM' : '02:00 PM'}">
+                </td>
+
+               
+                <td th:text="${stat.index == 0 ? '12:00 PM' :
+                              stat.index == 1 ? '02:30 PM' :
+                              stat.index == 2 ? '05:00 PM' : '08:00 PM'}">
+                </td>
+
+              
+                <td th:text="${stat.index == 0 ? '6h 00m' :
+                              stat.index == 1 ? '6h 00m' :
+                              stat.index == 2 ? '6h 00m' : '6h 00m'}">
+                </td>
+
                 <td th:text="'₹' + ${bus.price}"></td>
+
                 <td>
                     <a th:href="@{/tickets/add(busId=${bus.id})}"
                        class="book-btn">Book</a>
                 </td>
+
             </tr>
         </tbody>
-
     </table>
 
     <div class="back-link">
