@@ -3,17 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Search Tickets</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" th:href="@{/css/search_style.css}"/>
+
 </head>
 <body>
 
-<h2>Search Tickets</h2>
-<form th:action="@{/tickets/search}" method="post">
-<label>Passenger Name: <input type="text" name="passengerName" /></label>
-<label>Travel Date: <input type="date" name="travelDate" /></label>
-<button type="submit">Search</button>
-</form>
-<br>
-<a th:href="@{/tickets}">Back to All Tickets</a>
+<div class="search-wrapper">
+
+    <div class="search-card">
+
+        <div class="search-header">
+            <h2>🔎 Search Your Ticket</h2>
+            <p>Find bookings by passenger name or date</p>
+        </div>
+
+        <form th:action="@{/tickets/search}" method="post">
+
+            <div class="form-group">
+                <label>Passenger Name</label>
+                <input type="text" name="passengerName" placeholder="Enter passenger name">
+            </div>
+
+            <div class="form-group">
+                <label>Travel Date</label>
+                <input type="date" name="travelDate">
+            </div>
+
+            <button type="submit" class="btn">Search Ticket</button>
+
+        </form>
+
+        <div class="back-link">
+            <a th:href="@{/tickets}">← Back to All Tickets</a>
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>

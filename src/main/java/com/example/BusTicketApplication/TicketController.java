@@ -26,6 +26,18 @@ public class TicketController {
         return "home";
     }
 
+    @GetMapping("/buses/search")
+    public String searchBuses(@RequestParam String source,
+                              @RequestParam String destination,
+                              Model model) {
+
+        List<Bus> buses =
+                busRepository.findBySourceAndDestination(source, destination);
+
+        model.addAttribute("buses", buses);
+        return "available_buses";
+    }
+
     @GetMapping("/tickets")
     public String listTickets(Model model) {
         model.addAttribute("tickets", ticketRepository.findAll());
@@ -33,22 +45,45 @@ public class TicketController {
     }
 
     @GetMapping("/tickets/add")
-    public String showAddForm(Model model) {
+    public String showAddForm(@RequestParam(required = false) Long busId,
+                              Model model) {
+
         model.addAttribute("ticket", new Ticket());
-        model.addAttribute("buses", busRepository.findAll());
+
+        if (busId != null) {
+            Bus bus = busRepository.findById(busId).orElse(null);
+            model.addAttribute("selectedBus", bus);
+        }
+
         return "add_ticket";
     }
 
     @PostMapping("/tickets/add")
-    public String saveTicket(@ModelAttribute Ticket ticket) {
+    public String saveTicket(@ModelAttribute Ticket ticket,
+                             @RequestParam("busId") Long busId) {
+
+        Bus bus = busRepository.findById(busId).orElse(null);
+
+        if (bus == null) {
+            return "redirect:/";
+        }
+
+        ticket.setBus(bus);
         ticketRepository.save(ticket);
+
         return "redirect:/tickets";
     }
 
-    @GetMapping("/tickets/delete/{id}")
-    public String deleteTicket(@PathVariable Long id) {
+    @GetMapping("/tickets/cancel")
+    public String showCancelPage(Model model) {
+        model.addAttribute("tickets", ticketRepository.findAll());
+        return "cancel_ticket";
+    }
+
+    @PostMapping("/tickets/cancel/{id}")
+    public String cancelTicket(@PathVariable Long id) {
         ticketRepository.deleteById(id);
-        return "redirect:/tickets";
+        return "redirect:/tickets/cancel";
     }
 
     @GetMapping("/tickets/search")
