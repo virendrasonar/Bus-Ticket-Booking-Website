@@ -25,16 +25,25 @@
                 <input type="text" th:field="*{passengerName}" required>
             </div>
 
-            <div class="form-group">
-                <label>Select Bus</label>
-                <select name="busId" required>
-                    <option value="">-- Select Bus --</option>
-                    <option th:each="bus : ${buses}"
-                            th:value="${bus.id}"
-                            th:text="${bus.busName + ' | ' + bus.source + ' → ' + bus.destination + ' | ₹' + bus.price}">
-                    </option>
-                </select>
-            </div>
+<div class="form-group">
+    <label>Select Bus</label>
+    <select name="busId" required>
+    <option value="">-- Select Bus --</option>
+
+    <option th:each="bus : ${buses}"
+            th:value="${bus.id}"
+            th:selected="${ticket.bus != null and ticket.bus.id == bus.id}"
+            th:text="${bus.busName 
+                      + ' | ' 
+                      + bus.source + ' → ' + bus.destination 
+                      + ' | ' 
+                      + #temporals.format(bus.departureTime, 'hh:mm a') 
+                      + ' - ' 
+                      + #temporals.format(bus.arrivalTime, 'hh:mm a')
+                      + ' | ₹' + bus.price}">
+    </option>
+</select>
+</div>
 
             <div class="form-group">
                 <label>Date of Travel</label>

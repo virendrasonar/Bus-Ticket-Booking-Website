@@ -9,4 +9,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByPassengerNameContainingIgnoreCase(String passengerName);
 
     List<Ticket> findByTravelDate(LocalDate travelDate);
+
+    List<Ticket> findByBus_Id(Long busId);
+
 }

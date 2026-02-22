@@ -21,6 +21,8 @@
                 <th>Passenger</th>
                 <th>Bus</th>
                 <th>Route</th>
+                <th>Departure</th>
+                <th>Arrival</th>
                 <th>Date</th>
                 <th>Price</th>
                 <th>Action</th>
@@ -29,18 +31,30 @@
 
         <tbody>
             <tr th:each="ticket : ${tickets}">
+
                 <td th:text="${ticket.id}"></td>
+
                 <td th:text="${ticket.passengerName}"></td>
 
-                <!-- Safe Bus Display -->
+                <!-- Bus Name -->
                 <td th:text="${ticket.bus != null ? ticket.bus.busName : 'N/A'}"></td>
 
+                <!-- Route -->
                 <td th:text="${ticket.bus != null ? ticket.bus.source + ' → ' + ticket.bus.destination : 'N/A'}"></td>
 
+                <!-- Departure -->
+                <td th:text="${ticket.bus != null ? #temporals.format(ticket.bus.departureTime, 'hh:mm a') : 'N/A'}"></td>
+
+                <!-- Arrival -->
+                <td th:text="${ticket.bus != null ? #temporals.format(ticket.bus.arrivalTime, 'hh:mm a') : 'N/A'}"></td>
+
+                <!-- Travel Date -->
                 <td th:text="${ticket.travelDate}"></td>
 
+                <!-- Price -->
                 <td th:text="${ticket.bus != null ? '₹' + ticket.bus.price : 'N/A'}"></td>
 
+                <!-- Cancel Button -->
                 <td>
                     <form th:action="@{/tickets/cancel/{id}(id=${ticket.id})}" method="post">
                         <button type="submit"

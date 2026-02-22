@@ -28,29 +28,24 @@
         </thead>
 
         <tbody>
-            <tr th:each="bus, stat : ${buses}">
-                
+            <tr th:each="bus : ${buses}">
+
                 <td th:text="${bus.busName}"></td>
 
                 <td th:text="${bus.source + ' → ' + bus.destination}"></td>
 
-                
-                <td th:text="${stat.index == 0 ? '06:00 AM' :
-                              stat.index == 1 ? '08:30 AM' :
-                              stat.index == 2 ? '11:00 AM' : '02:00 PM'}">
+                <!-- REAL Departure Time -->
+                <td class="dep"
+                    th:text="${#temporals.format(bus.departureTime, 'HH:mm')}">
                 </td>
 
-               
-                <td th:text="${stat.index == 0 ? '12:00 PM' :
-                              stat.index == 1 ? '02:30 PM' :
-                              stat.index == 2 ? '05:00 PM' : '08:00 PM'}">
+                <!-- REAL Arrival Time -->
+                <td class="arr"
+                    th:text="${#temporals.format(bus.arrivalTime, 'HH:mm')}">
                 </td>
 
-              
-                <td th:text="${stat.index == 0 ? '6h 00m' :
-                              stat.index == 1 ? '6h 00m' :
-                              stat.index == 2 ? '6h 00m' : '6h 00m'}">
-                </td>
+                <!-- Duration calculated in JS -->
+                <td class="dur"></td>
 
                 <td th:text="'₹' + ${bus.price}"></td>
 
@@ -68,6 +63,34 @@
     </div>
 
 </div>
+
+<!-- Duration Calculation Script -->
+<script>
+document.querySelectorAll("tbody tr").forEach(function(row) {
+
+    const dep = row.querySelector(".dep");
+    const arr = row.querySelector(".arr");
+    const dur = row.querySelector(".dur");
+
+    if(dep && arr && dur) {
+
+        let depTime = dep.innerText.split(":");
+        let arrTime = arr.innerText.split(":");
+
+        let depMinutes = parseInt(depTime[0]) * 60 + parseInt(depTime[1]);
+        let arrMinutes = parseInt(arrTime[0]) * 60 + parseInt(arrTime[1]);
+
+        let diff = arrMinutes - depMinutes;
+
+        if(diff < 0) diff += 24 * 60; // handle overnight buses
+
+        let hours = Math.floor(diff / 60);
+        let minutes = diff % 60;
+
+        dur.innerText = hours + "h " + minutes + "m";
+    }
+});
+</script>
 
 </body>
 </html>

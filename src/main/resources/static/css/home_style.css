@@ -4,47 +4,49 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f5f5f5;
+    background: #f5f5f5;
 }
 
 /* NAVBAR */
 .navbar {
-    background: #d32f2f;
+    background: linear-gradient(90deg, #d32f2f, #b71c1c);
     color: white;
     display: flex;
     justify-content: space-between;
-    padding: 18px 60px;
+    padding: 18px 70px;
     align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .logo {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .nav-links a {
     color: white;
-    margin-left: 30px;
+    margin-left: 35px;
     text-decoration: none;
     font-weight: 500;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
 .nav-links a:hover {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 /* HERO */
 .hero {
-    height: 80vh;
+    height: 85vh;
     background: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
     position: relative;
 }
 
 .hero-overlay {
     background: linear-gradient(
-        rgba(211, 47, 47, 0.6),
-        rgba(0, 0, 0, 0.7)
+        rgba(211, 47, 47, 0.65),
+        rgba(0, 0, 0, 0.75)
     );
     height: 100%;
     display: flex;
@@ -55,101 +57,128 @@ body {
 .hero-content {
     text-align: center;
     color: white;
-    max-width: 800px;
+    max-width: 900px;
     padding: 0 20px;
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 3.8rem;
     font-weight: 800;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 35px;
+    font-size: 1.25rem;
+    margin-bottom: 40px;
     letter-spacing: 0.5px;
 }
 
 /* SEARCH BAR */
 .search-bar {
-    background: white;
-    padding: 20px 25px;
-    border-radius: 12px;
+    background: rgba(255,255,255,0.95);
+    padding: 25px 30px;
+    border-radius: 16px;
     display: flex;
-    gap: 15px;
+    gap: 18px;
     justify-content: center;
     flex-wrap: wrap;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
 }
 
 .search-bar input {
-    padding: 12px;
-    border-radius: 8px;
+    padding: 14px;
+    border-radius: 10px;
     border: 1px solid #ddd;
-    width: 170px;
-    font-size: 0.9rem;
-    transition: 0.3s;
+    width: 190px;
+    font-size: 0.95rem;
+    transition: 0.3s ease;
 }
 
 .search-bar input:focus {
     border-color: #d32f2f;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(211,47,47,0.2);
+    box-shadow: 0 0 0 3px rgba(211,47,47,0.2);
 }
 
+/* SEARCH BUTTON */
 .search-btn {
-    background: #d32f2f;
+    background: linear-gradient(90deg, #d32f2f, #b71c1c);
     color: white;
-    padding: 12px 22px;
-    border-radius: 8px;
+    padding: 14px 26px;
+    border-radius: 10px;
     text-decoration: none;
     font-weight: 600;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
 .search-btn:hover {
-    background: #b71c1c;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
 /* QUICK ACTIONS */
 .quick-actions {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    padding: 70px 20px;
+    gap: 45px;
+    padding: 90px 20px;
     flex-wrap: wrap;
 }
 
 .action-card {
     background: white;
-    width: 230px;
-    padding: 35px;
+    width: 240px;
+    padding: 40px;
     text-align: center;
-    border-radius: 14px;
+    border-radius: 18px;
     text-decoration: none;
     color: #1c1c1c;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    transition: 0.3s;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    transition: 0.35s ease;
 }
 
 .action-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 18px 35px rgba(0,0,0,0.15);
+    transform: translateY(-12px);
+    box-shadow: 0 25px 55px rgba(0,0,0,0.15);
 }
 
 .action-card i {
-    font-size: 2.8rem;
+    font-size: 3rem;
     color: #d32f2f;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+}
+
+.action-card h3 {
+    margin: 10px 0 0;
+    font-weight: 600;
 }
 
 /* FOOTER */
 footer {
     text-align: center;
-    padding: 25px;
+    padding: 30px;
     background: #212121;
     color: white;
     font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .hero-content h1 {
+        font-size: 2.6rem;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-bar input {
+        width: 100%;
+        max-width: 320px;
+    }
 }

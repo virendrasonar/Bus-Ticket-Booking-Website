@@ -26,37 +26,45 @@ public class TicketController {
         return "home";
     }
 
+    // SEARCH BUSES (Home search bar)
     @GetMapping("/buses/search")
     public String searchBuses(@RequestParam String source,
                               @RequestParam String destination,
                               Model model) {
 
         List<Bus> buses =
-                busRepository.findBySourceAndDestination(source, destination);
+                busRepository.findBySourceIgnoreCaseAndDestinationIgnoreCase(source, destination);
 
         model.addAttribute("buses", buses);
         return "available_buses";
     }
 
+    // SHOW ALL TICKETS
     @GetMapping("/tickets")
     public String listTickets(Model model) {
         model.addAttribute("tickets", ticketRepository.findAll());
         return "list_tickets";
     }
 
+    // SHOW ADD TICKET PAGE (WITH OPTIONAL BUS PRESELECT)
     @GetMapping("/tickets/add")
-    public String showAddForm(Model model) {
+    public String showAddForm(@RequestParam(required = false) Long busId,
+                              Model model) {
 
-        model.addAttribute("ticket", new Ticket());
+        Ticket ticket = new Ticket();
 
-        List<Bus> busList = busRepository.findAll();
-        System.out.println("BUS COUNT FROM DB: " + busList.size());
+        if (busId != null) {
+            Bus bus = busRepository.findById(busId).orElse(null);
+            ticket.setBus(bus);
+        }
 
-        model.addAttribute("buses", busList);
+        model.addAttribute("ticket", ticket);
+        model.addAttribute("buses", busRepository.findAll());
 
         return "add_ticket";
     }
 
+    // SAVE TICKET
     @PostMapping("/tickets/add")
     public String saveTicket(@ModelAttribute Ticket ticket,
                              @RequestParam("busId") Long busId) {
@@ -73,23 +81,27 @@ public class TicketController {
         return "redirect:/tickets";
     }
 
+    // CANCEL PAGE
     @GetMapping("/tickets/cancel")
     public String showCancelPage(Model model) {
         model.addAttribute("tickets", ticketRepository.findAll());
         return "cancel_ticket";
     }
 
+    // CANCEL ACTION
     @PostMapping("/tickets/cancel/{id}")
     public String cancelTicket(@PathVariable Long id) {
         ticketRepository.deleteById(id);
         return "redirect:/tickets/cancel";
     }
 
+    // SEARCH TICKET PAGE
     @GetMapping("/tickets/search")
     public String searchForm() {
         return "search_tickets";
     }
 
+    // SEARCH RESULTS
     @PostMapping("/tickets/search")
     public String searchResults(
             @RequestParam(required = false) String passengerName,

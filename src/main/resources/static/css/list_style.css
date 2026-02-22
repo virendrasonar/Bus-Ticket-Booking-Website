@@ -1,66 +1,97 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: #f5f5f5;
+    background: linear-gradient(135deg, #f5f5f5, #eeeeee);
 }
 
+/* MAIN CONTAINER */
 .container {
-    padding: 50px;
-    max-width: 1100px;
+    padding: 60px 30px;
+    max-width: 1200px;
     margin: auto;
 }
 
+/* TITLE */
 h2 {
     text-align: center;
     color: #d32f2f;
+    font-weight: 700;
+    margin-bottom: 30px;
 }
 
+/* TABLE CARD EFFECT */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 30px;
+    margin-top: 20px;
     background: white;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
 }
 
+/* TABLE HEADER */
 th {
-    background: #d32f2f;
+    background: linear-gradient(90deg, #d32f2f, #b71c1c);
     color: white;
-    padding: 12px;
+    padding: 14px;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
 }
 
+/* TABLE DATA */
 td {
-    padding: 12px;
+    padding: 14px;
     text-align: center;
-    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-tr:hover {
-    background: #f9f9f9;
+/* ROW HOVER */
+tbody tr {
+    transition: 0.3s ease;
 }
 
-.delete-btn {
-    background: #d32f2f;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.8rem;
+tbody tr:hover {
+    background: #fff5f5;
+    transform: scale(1.01);
 }
 
-.delete-btn:hover {
-    background: #b71c1c;
+/* PRICE COLUMN STYLE */
+td:last-child {
+    font-weight: 600;
+    color: #2e7d32;
 }
 
+/* HOME BUTTON */
 .home-link {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 35px;
 }
 
 .home-link a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #d32f2f;
+    color: white;
     text-decoration: none;
-    color: #d32f2f;
-    font-weight: 500;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.home-link a:hover {
+    background: #b71c1c;
+    transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 10px;
+    }
 }
