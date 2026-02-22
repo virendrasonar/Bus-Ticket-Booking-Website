@@ -45,15 +45,14 @@ public class TicketController {
     }
 
     @GetMapping("/tickets/add")
-    public String showAddForm(@RequestParam(required = false) Long busId,
-                              Model model) {
+    public String showAddForm(Model model) {
 
         model.addAttribute("ticket", new Ticket());
 
-        if (busId != null) {
-            Bus bus = busRepository.findById(busId).orElse(null);
-            model.addAttribute("selectedBus", bus);
-        }
+        List<Bus> busList = busRepository.findAll();
+        System.out.println("BUS COUNT FROM DB: " + busList.size());
+
+        model.addAttribute("buses", busList);
 
         return "add_ticket";
     }
