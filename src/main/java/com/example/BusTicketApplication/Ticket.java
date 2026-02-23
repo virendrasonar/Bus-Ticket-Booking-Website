@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)   
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 100)
@@ -20,11 +20,21 @@ public class Ticket {
     @Column(nullable = false, length = 15)
     private String whatsappNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)   // better performance
+    // IMPORTANT: Use EAGER to avoid 500 error in Thymeleaf
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bus_id", nullable = false)
     private Bus bus;
 
     public Ticket() {}
+
+    // Constructor for DataInitializer
+    public Ticket(String passengerName, String whatsappNumber,
+                  LocalDate travelDate, Bus bus) {
+        this.passengerName = passengerName;
+        this.whatsappNumber = whatsappNumber;
+        this.travelDate = travelDate;
+        this.bus = bus;
+    }
 
     public Long getId() { return id; }
 
@@ -45,12 +55,4 @@ public class Ticket {
 
     public Bus getBus() { return bus; }
     public void setBus(Bus bus) { this.bus = bus; }
-
-    @Override
-    public String toString() {
-        return "Ticket{id=" + id +
-                ", passengerName='" + passengerName + '\'' +
-                ", travelDate=" + travelDate +
-                '}';
-    }
 }
