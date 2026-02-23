@@ -49,6 +49,6 @@ public class BusController {
                     "No buses found for " + source + " → " + destination);
         }
 
-        return "all_buses";
+        return "availabel_buses";
     }
 }
