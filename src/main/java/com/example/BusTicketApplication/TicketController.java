@@ -25,12 +25,6 @@ public class TicketController {
         this.busRepository = busRepository;
     }
 
-    // HOME PAGE
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
-
     // SHOW ALL TICKETS
     @GetMapping
     public String listTickets(Model model) {
@@ -67,7 +61,7 @@ public class TicketController {
                     ticketRepository.save(ticket);
                     return "redirect:/tickets";
                 })
-                .orElse("redirect:/");
+                .orElse("redirect:/tickets");
     }
 
     // CANCEL PAGE
