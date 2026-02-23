@@ -53,7 +53,7 @@ body {
     width: 100%;
 }
 
-/* HERO (IMAGE NOT CHANGED) */
+/* HERO */
 .hero {
     height: 85vh;
     background: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
@@ -148,14 +148,17 @@ body {
 .quick-actions {
     display: flex;
     justify-content: center;
-    gap: 45px;
+    gap: 40px;
     padding: 90px 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Force single row on desktop */
 }
 
+/* ACTION CARDS */
 .action-card {
     background: white;
-    width: 240px;
+    flex: 1;                 /* Equal width */
+    max-width: 260px;
+    min-width: 200px;
     padding: 40px;
     text-align: center;
     border-radius: 18px;
@@ -248,6 +251,7 @@ footer {
     }
 
     .quick-actions {
+        flex-wrap: wrap; 
         gap: 25px;
         padding: 60px 20px;
     }
