@@ -5,6 +5,7 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background: #f5f5f5;
+    scroll-behavior: smooth;
 }
 
 /* NAVBAR */
@@ -16,6 +17,9 @@ body {
     padding: 18px 70px;
     align-items: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
@@ -29,14 +33,27 @@ body {
     margin-left: 35px;
     text-decoration: none;
     font-weight: 500;
+    position: relative;
     transition: 0.3s ease;
 }
 
-.nav-links a:hover {
-    opacity: 0.85;
+/* Smooth underline animation */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: white;
+    transition: 0.3s ease;
 }
 
-/* HERO */
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* HERO (IMAGE NOT CHANGED) */
 .hero {
     height: 85vh;
     background: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
@@ -59,6 +76,7 @@ body {
     color: white;
     max-width: 900px;
     padding: 0 20px;
+    animation: fadeUp 1s ease forwards;
 }
 
 .hero-content h1 {
@@ -72,19 +90,25 @@ body {
     font-size: 1.25rem;
     margin-bottom: 40px;
     letter-spacing: 0.5px;
+    opacity: 0.95;
 }
 
 /* SEARCH BAR */
 .search-bar {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.96);
     padding: 25px 30px;
-    border-radius: 16px;
+    border-radius: 18px;
     display: flex;
     gap: 18px;
     justify-content: center;
     flex-wrap: wrap;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
     backdrop-filter: blur(8px);
+    transition: 0.3s ease;
+}
+
+.search-bar:hover {
+    transform: translateY(-3px);
 }
 
 .search-bar input {
@@ -108,15 +132,16 @@ body {
     color: white;
     padding: 14px 26px;
     border-radius: 10px;
-    text-decoration: none;
+    border: none;
     font-weight: 600;
+    cursor: pointer;
     transition: 0.3s ease;
     letter-spacing: 0.5px;
 }
 
 .search-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 
 /* QUICK ACTIONS */
@@ -138,17 +163,40 @@ body {
     color: #1c1c1c;
     box-shadow: 0 15px 40px rgba(0,0,0,0.08);
     transition: 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle red hover glow */
+.action-card::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(180deg, rgba(211,47,47,0.08), transparent);
+    bottom: 0;
+    left: 0;
+    transition: 0.4s ease;
+}
+
+.action-card:hover::before {
+    height: 100%;
 }
 
 .action-card:hover {
     transform: translateY(-12px);
-    box-shadow: 0 25px 55px rgba(0,0,0,0.15);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.15);
 }
 
 .action-card i {
     font-size: 3rem;
     color: #d32f2f;
     margin-bottom: 18px;
+    transition: 0.3s ease;
+}
+
+.action-card:hover i {
+    transform: scale(1.1);
 }
 
 .action-card h3 {
@@ -166,8 +214,25 @@ footer {
     letter-spacing: 0.5px;
 }
 
+/* ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
+
+    .navbar {
+        padding: 15px 25px;
+    }
+
     .hero-content h1 {
         font-size: 2.6rem;
     }
@@ -180,5 +245,10 @@ footer {
     .search-bar input {
         width: 100%;
         max-width: 320px;
+    }
+
+    .quick-actions {
+        gap: 25px;
+        padding: 60px 20px;
     }
 }

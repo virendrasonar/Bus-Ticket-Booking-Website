@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Search Tickets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Search Tickets | BusBooking</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" th:href="@{/css/search_style.css}"/>
@@ -16,22 +18,38 @@
 
         <div class="search-header">
             <h2>🔎 Search Your Ticket</h2>
-            <p>Find bookings by passenger name or date</p>
+            <p>Search by passenger name <strong>or</strong> travel date</p>
         </div>
 
-        <form th:action="@{/tickets/search}" method="post">
+        <form th:action="@{/tickets/search}" 
+              method="post"
+              autocomplete="off">
 
+            <!-- Passenger Name -->
             <div class="form-group">
-                <label>Passenger Name</label>
-                <input type="text" name="passengerName" placeholder="Enter passenger name">
+                <label for="passengerName">Passenger Name</label>
+                <input type="text"
+                       id="passengerName"
+                       name="passengerName"
+                       placeholder="Enter passenger name">
             </div>
 
-            <div class="form-group">
-                <label>Travel Date</label>
-                <input type="date" name="travelDate">
+            <div class="divider">
+                <span>OR</span>
             </div>
 
-            <button type="submit" class="btn">Search Ticket</button>
+            <!-- Travel Date -->
+            <div class="form-group">
+                <label for="travelDate">Travel Date</label>
+                <input type="date"
+                       id="travelDate"
+                       name="travelDate">
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn">
+                🔍 Search Ticket
+            </button>
 
         </form>
 

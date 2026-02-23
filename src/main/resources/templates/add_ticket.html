@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Book Bus Ticket</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Book Bus Ticket | BusBooking</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" th:href="@{/css/add_style.css}">
@@ -16,52 +18,84 @@
 
         <div class="form-header">
             <h2>🚌 Book Your Ticket</h2>
+            <p>Fast • Secure • Instant Confirmation</p>
         </div>
 
-        <form th:action="@{/tickets/add}" th:object="${ticket}" method="post">
+        <form th:action="@{/tickets/add}" 
+              th:object="${ticket}" 
+              method="post"
+              autocomplete="off">
 
+            <!-- Passenger Name -->
             <div class="form-group">
-                <label>Passenger Name</label>
-                <input type="text" th:field="*{passengerName}" required>
-            </div>
-
-<div class="form-group">
-    <label>Select Bus</label>
-    <select name="busId" required>
-    <option value="">-- Select Bus --</option>
-
-    <option th:each="bus : ${buses}"
-            th:value="${bus.id}"
-            th:selected="${ticket.bus != null and ticket.bus.id == bus.id}"
-            th:text="${bus.busName 
-                      + ' | ' 
-                      + bus.source + ' → ' + bus.destination 
-                      + ' | ' 
-                      + #temporals.format(bus.departureTime, 'hh:mm a') 
-                      + ' - ' 
-                      + #temporals.format(bus.arrivalTime, 'hh:mm a')
-                      + ' | ₹' + bus.price}">
-    </option>
-</select>
-</div>
-
-            <div class="form-group">
-                <label>Date of Travel</label>
-                <input type="date" th:field="*{travelDate}" required>
-            </div>
-
-            <div class="form-group">
-                <label>WhatsApp Number</label>
+                <label for="passengerName">Passenger Name</label>
                 <input type="text"
-                       th:field="*{whatsappNumber}"
-                       pattern="\+91[0-9]{10}"
-                       placeholder="+91XXXXXXXXXX"
+                       id="passengerName"
+                       th:field="*{passengerName}"
+                       placeholder="Enter full name"
+                       minlength="3"
+                       maxlength="100"
                        required>
             </div>
 
-            <button type="submit" class="btn">Book Ticket</button>
+            <!-- Select Bus -->
+            <div class="form-group">
+                <label for="busId">Select Bus</label>
+                <select name="busId" id="busId" required>
+
+                    <option value="">-- Select Bus --</option>
+
+                    <option th:each="bus : ${buses}"
+                            th:value="${bus.id}"
+                            th:selected="${ticket.bus != null and ticket.bus.id == bus.id}"
+                            th:text="${bus.busName 
+                                      + ' | ' 
+                                      + bus.source + ' → ' + bus.destination 
+                                      + ' | ' 
+                                      + #temporals.format(bus.departureTime, 'hh:mm a') 
+                                      + ' - ' 
+                                      + #temporals.format(bus.arrivalTime, 'hh:mm a')
+                                      + ' | ₹' + #numbers.formatDecimal(bus.price, 1, 2)}">
+                    </option>
+
+                </select>
+            </div>
+
+            <!-- Travel Date -->
+            <div class="form-group">
+                <label for="travelDate">Date of Travel</label>
+                <input type="date"
+                       id="travelDate"
+                       th:field="*{travelDate}"
+                       th:attr="min=${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}"
+                       required>
+            </div>
+
+            <!-- WhatsApp Number -->
+            <div class="form-group">
+                <label for="whatsappNumber">WhatsApp Number</label>
+                <input type="tel"
+                       id="whatsappNumber"
+                       th:field="*{whatsappNumber}"
+                       pattern="[6-9][0-9]{9}"
+                       minlength="10"
+                       maxlength="10"
+                       inputmode="numeric"
+                       placeholder="Enter 10 digit mobile number"
+                       required>
+                <small class="hint">Example: 9876543210</small>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn">
+                🎫 Confirm Booking
+            </button>
 
         </form>
+
+        <div class="back-link">
+            <a th:href="@{/}">← Back to Home</a>
+        </div>
 
     </div>
 

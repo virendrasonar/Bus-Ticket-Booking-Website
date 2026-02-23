@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>All Tickets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Booked Tickets | BusBooking</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" th:href="@{/css/list_style.css}">
@@ -14,7 +16,14 @@
 
     <h2>🎫 Booked Tickets</h2>
 
-    <table>
+    <!-- EMPTY STATE -->
+    <div th:if="${#lists.isEmpty(tickets)}" class="empty-state">
+        <p>No tickets booked yet.</p>
+        <a th:href="@{/tickets/add}" class="book-btn">Book Now</a>
+    </div>
+
+    <!-- TABLE -->
+    <table th:if="${!#lists.isEmpty(tickets)}">
         <thead>
             <tr>
                 <th>ID</th>
@@ -36,22 +45,22 @@
                 <td th:text="${ticket.passengerName}"></td>
 
                 <!-- Bus Name -->
-                <td th:text="${ticket.bus != null ? ticket.bus.busName : 'N/A'}"></td>
+                <td th:text="${ticket.bus?.busName ?: 'N/A'}"></td>
 
                 <!-- Route -->
                 <td th:text="${ticket.bus != null ? ticket.bus.source + ' → ' + ticket.bus.destination : 'N/A'}"></td>
 
                 <!-- Departure -->
-                <td th:text="${ticket.bus != null ? ticket.bus.departureTime : 'N/A'}"></td>
+                <td th:text="${ticket.bus != null ? #temporals.format(ticket.bus.departureTime, 'HH:mm') : 'N/A'}"></td>
 
                 <!-- Arrival -->
-                <td th:text="${ticket.bus != null ? ticket.bus.arrivalTime : 'N/A'}"></td>
+                <td th:text="${ticket.bus != null ? #temporals.format(ticket.bus.arrivalTime, 'HH:mm') : 'N/A'}"></td>
 
                 <!-- Travel Date -->
-                <td th:text="${ticket.travelDate}"></td>
+                <td th:text="${#temporals.format(ticket.travelDate, 'dd MMM yyyy')}"></td>
 
                 <!-- Price -->
-                <td th:text="${ticket.bus != null ? '₹' + ticket.bus.price : 'N/A'}"></td>
+                <td th:text="${ticket.bus != null ? '₹' + #numbers.formatDecimal(ticket.bus.price, 1, 2) : 'N/A'}"></td>
 
             </tr>
         </tbody>

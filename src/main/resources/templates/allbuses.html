@@ -2,50 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>All Buses</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>All Buses | BusBooking</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" th:href="@{/css/available_style.css}">
-
 </head>
+
 <body>
 
 <div class="container">
 
-<h2>🚌 Available Buses</h2>
+    <h2>🚌 All Buses</h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Bus Name</th>
-            <th>Route</th>
-            <th>Departure</th>
-            <th>Arrival</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
+    <!-- EMPTY STATE -->
+    <div th:if="${#lists.isEmpty(buses)}" class="empty-state">
+        <p>No buses available at the moment.</p>
+        <a th:href="@{/}" class="back-home-btn">Go Back Home</a>
+    </div>
 
-    <tbody>
-        <tr th:each="bus : ${buses}">
-            <td th:text="${bus.id}"></td>
-            <td th:text="${bus.busName}"></td>
-            <td th:text="${bus.source + ' → ' + bus.destination}"></td>
-            <td th:text="${bus.departureTime}"></td>
-            <td th:text="${bus.arrivalTime}"></td>
-            <td th:text="'₹' + ${bus.price}"></td>
-            <td>
-                <a th:href="@{/tickets/add(busId=${bus.id})}"
-                   class="book-btn">Book</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <!-- TABLE -->
+    <table th:if="${!#lists.isEmpty(buses)}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Bus Name</th>
+                <th>Route</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
 
-<div class="back-link">
-    <a th:href="@{/}">← Back to Home</a>
-</div>
+        <tbody>
+            <tr th:each="bus : ${buses}">
+
+                <td th:text="${bus.id}"></td>
+
+                <td th:text="${bus.busName}"></td>
+
+                <td th:text="${bus.source + ' → ' + bus.destination}"></td>
+
+                <!-- Proper time formatting -->
+                <td th:text="${#temporals.format(bus.departureTime, 'hh:mm a')}"></td>
+
+                <td th:text="${#temporals.format(bus.arrivalTime, 'hh:mm a')}"></td>
+
+                <!-- Proper price formatting -->
+                <td th:text="${'₹' + #numbers.formatDecimal(bus.price, 1, 2)}"></td>
+
+                <td>
+                    <a th:href="@{/tickets/add(busId=${bus.id})}"
+                       class="book-btn">
+                       Book Now
+                    </a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="back-link">
+        <a th:href="@{/}">← Back to Home</a>
+    </div>
 
 </div>
 

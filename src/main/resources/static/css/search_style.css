@@ -13,16 +13,19 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 20px;
 }
 
 /* CARD */
 .search-card {
     background: #ffffff;
     width: 420px;
+    max-width: 100%;
     padding: 45px;
-    border-radius: 18px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.12);
     transition: 0.3s ease;
+    animation: fadeIn 0.4s ease-in-out;
 }
 
 .search-card:hover {
@@ -38,7 +41,8 @@ body {
 .search-header h2 {
     margin: 0;
     color: #d32f2f;
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: 0.5px;
 }
 
 .search-header p {
@@ -62,36 +66,71 @@ label {
 }
 
 input {
-    padding: 12px;
-    border-radius: 10px;
+    padding: 13px;
+    border-radius: 12px;
     border: 1px solid #ddd;
-    font-size: 0.9rem;
-    transition: 0.3s ease;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    background: #fafafa;
 }
 
 input:focus {
     border-color: #d32f2f;
     outline: none;
+    background: #ffffff;
     box-shadow: 0 0 0 3px rgba(211,47,47,0.15);
+    transform: translateY(-1px);
+}
+
+/* OR DIVIDER */
+.divider {
+    text-align: center;
+    margin: 10px 0 20px 0;
+    position: relative;
+}
+
+.divider span {
+    background: #ffffff;
+    padding: 0 12px;
+    color: #999;
+    font-size: 0.8rem;
+    position: relative;
+    z-index: 1;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #e0e0e0;
+    z-index: 0;
 }
 
 /* BUTTON */
 .btn {
     width: 100%;
-    padding: 14px;
+    padding: 15px;
     background: linear-gradient(90deg, #d32f2f, #b71c1c);
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: all 0.25s ease;
     letter-spacing: 0.5px;
+    font-size: 0.95rem;
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 /* BACK LINK */
@@ -102,7 +141,7 @@ input:focus {
 
 .back-link a {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 22px;
     background: #212121;
     color: white;
     border-radius: 8px;
@@ -116,10 +155,26 @@ input:focus {
     transform: translateY(-2px);
 }
 
+/* FADE ANIMATION */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* RESPONSIVE */
 @media (max-width: 500px) {
     .search-card {
-        width: 90%;
+        width: 95%;
         padding: 30px;
+    }
+
+    .search-header h2 {
+        font-size: 1.4rem;
     }
 }
