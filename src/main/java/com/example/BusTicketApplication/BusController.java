@@ -16,7 +16,7 @@ public class BusController {
         this.busRepository = busRepository;
     }
 
-    // 1️⃣ Show all buses -> /buses
+    // Show all buses -> /buses
     @GetMapping
     public String showAllBuses(Model model) {
 
@@ -27,10 +27,10 @@ public class BusController {
             model.addAttribute("message", "No buses available at the moment.");
         }
 
-        return "all_buses";
+        return "allbuses"; 
     }
 
-    // 2️⃣ Search buses -> /buses/search
+    // Search buses -> /buses/search
     @GetMapping("/search")
     public String searchBuses(@RequestParam String source,
                               @RequestParam String destination,
@@ -49,6 +49,6 @@ public class BusController {
                     "No buses found for " + source + " → " + destination);
         }
 
-        return "availabel_buses";
+        return "available_buses";   
     }
 }
